@@ -1,0 +1,26 @@
+<Books>
+  <Book>
+    <Title>The Communist Manifesto</Title>
+    <Authors>Friedrich Engels, Karl Marx</Authors>
+    <OriginalLanguage>German</OriginalLanguage>
+    <YearPublished>1848</YearPublished>
+    <CityPublished>London</CityPublished>
+    <NumberOfWords>24000</NumberOfWords>
+  </Book>
+  <Book>
+    <Title>The Social Contract</Title>
+    <Authors>Jean-Jacques Rousseau</Authors>
+    <OriginalLanguage>French</OriginalLanguage>
+    <YearPublished>1762</YearPublished>
+    <CityPublished>Geneva</CityPublished>
+    <NumberOfWords>42750</NumberOfWords>
+  </Book>
+  <Book>
+    <Title>Existentialism Is a Humanism</Title>
+    <Authors>Jean-Paul Sartre</Authors>
+    <OriginalLanguage>French</OriginalLanguage>
+    <YearPublished>1946</YearPublished>
+    <CityPublished>New Haven</CityPublished>
+    <NumberOfWords>17852</NumberOfWords>
+  </Book>
+</Books>

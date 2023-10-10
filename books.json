@@ -1,0 +1,28 @@
+{
+  "Books": [
+    {
+      "Title": "The Communist Manifesto",
+      "Authors": "Friedrich Engels, Karl Marx",
+      "OriginalLanguage": "German",
+      "YearPublished": 1848,
+      "CityPublished": "London",
+      "NumberOfWords": 24000
+    },
+    {
+      "Title": "The Social Contract",
+      "Authors": "Jean-Jacques Rousseau",
+      "OriginalLanguage": "French",
+      "YearPublished": 1762,
+      "CityPublished": "Geneva",
+      "NumberOfWords": 42750
+    },
+    {
+      "Title": "Existentialism Is a Humanism",
+      "Authors": "Jean-Paul Sartre",
+      "OriginalLanguage": "French",
+      "YearPublished": 1946,
+      "CityPublished": "New Haven",
+      "NumberOfWords": 17852
+    }
+  ]
+}
