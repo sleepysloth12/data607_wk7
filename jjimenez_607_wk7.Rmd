@@ -1,0 +1,108 @@
+---
+title: "Data 607 Week 7"
+author: "Jean Jimenez"
+date: "2023-10-10"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Importing Different Data Formats {.tabset .tabset-pills}
+
+This week, we were asked to create 3 files (json, html, xml) containing a table with information about books. Then, we were asked to import each of the tables into data frames.
+
+```{r}
+library(dplyr)
+library(tidyverse)
+```
+
+## html
+
+To import the html data, I first created and uploaded the html file of books to github. I used the rvest package. I passed the url through read_html() function. The function gets the raw html data from the github page and stores the html data in a xml_document as a xml_node. Afterwards, I used dplyr to find the table in the html data by using html_nodes(). The table argument will look for the html
+
+<table>
+
+. After extracting the data from the table, I place it in the data frame html_books.
+
+```{r}
+library(rvest)
+
+#url to html file
+
+html_url="https://raw.githubusercontent.com/sleepysloth12/data607_wk7/main/books.html"
+
+
+#read html
+git_html= read_html(html_url)
+class(git_html)
+
+#extract first table into dataframe
+
+html_books = git_html %>% 
+  html_nodes("table") %>% 
+  .[[1]] %>% 
+  html_table()
+
+html_books
+
+```
+
+## json
+
+To import the json data,I used both the package jsonlite and httr.I used httr's GET() which retrieves the data from a web page. I stored the webpage data in git_json (which stores it as a response class). Afterwards, I use httr's content() to extract the information from the web response and store it as a character vector. Then, I used jsonlite's fromJSON() function to retrieve the information from the json file and store it as list. The flatten=TRUE value will make a wide data frame. Finally, I converted that list to a data frame.
+
+```{r}
+library(jsonlite)
+library(httr)
+
+#json url
+json_url="https://raw.githubusercontent.com/sleepysloth12/data607_wk7/main/books.json"
+
+#getting json info from github page
+git_json=GET(json_url)
+class(git_json)
+
+json_content=content(git_json, "text")
+class(json_content)
+#get json data
+json_data = fromJSON(json_content, flatten = TRUE)
+class(json_data)
+
+json_books= as.data.frame(json_data)
+
+json_books
+```
+
+## xml
+
+To import the xml data, I used the package xml12. I used its function read_xml() to read and get the xml data from the url.This stores the data as an xml_document in xml_nodes. Afterwards, we convert that xml data to a list then a dataframe.
+
+```{r}
+library(xml2)
+
+#xml_url
+xml_url="https://raw.githubusercontent.com/sleepysloth12/data607_wk7/main/books.xml"
+
+#read the xml data from webpage
+
+books_xml_dat=read_xml(xml_url)
+class(books_xml_dat)
+
+#turn xml node to list
+books_xml_lst=as_list(books_xml_dat)
+
+xml_books=as.data.frame(books_xml_lst)
+
+xml_books
+
+
+```
+
+# Conclusion
+
+The data frames are not identical. They are each unique because the structures of html, json, and xml are different. The html data frame was the closest one to the actual data. html has no attributes to store the data in and there is no nested structure. The json file type can handles nested objects and arrays. In my json data frame, you can see the object 'Books' and its different attributes ('Books.NumberOfWords', 'Books.OriginalLanguage' ,etc.). The xml file was the most nested, with books being the list of all books, and book being each book. Each data point had its own column and it is a wide wide table. If I had to choose between the three, I would choose json. json also maintains the class of the data (ie. year being int).
